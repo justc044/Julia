@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>New Information</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+    {% load static %}
+	<link rel="icon" type="image/png" href="{% static 'img/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/icon-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/animate2.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/select2.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main2.css' %}">
+<!--===============================================================================================-->
+  <script src='https://cdn.tiny.cloud/1/plzyf7545l27m1lmh2j770kr8e2uf0ypldgy5tt1dbkdi9kp/tinymce/5/tinymce.min.js' referrerpolicy="origin">
+  </script>
+  <script>
+    tinymce.init({
+      selector: '#mytextarea'
+    });
+  </script>
+</head>
+<body>
+
+
+	<div class="container-contact100" style="background-image: url('/static/img/bg-01.jpg');">
+		<div class="wrap-contact100">
+			{% if blog == None %}
+			<form class="contact100-form validate-form" method="post" action="{% url 'blog_submit' %}">
+			{% else %}
+			<form class="contact100-form validate-form" method="post" action="{% url 'blog_update' blog.pk %}">
+			{% endif %}
+                {% csrf_token %}
+				<span class="contact100-form-title">
+					{% if blog == None %}
+					New Information
+					{% else %}
+					Update Information
+					{% endif %}
+				</span>
+
+				<div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
+					<span class="label-input100">Name</span>
+					<input class="input100" type="text" name="name" value="{{ member_info.name }}" readonly>
+				</div>
+
+				<div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Category is required">
+					<span class="label-input100">Category</span>
+					<select class="input100" name="category">
+                        {% for c in categories %}
+							{% if blog != None and c.pk == blog.category.pk %}
+								<option value={{ c.pk }} selected>{{ c.name }}</option>
+							{% else %}
+                        		<option value={{ c.pk }}>{{ c.name }}</option>
+							{% endif %}
+                        {% endfor %}
+                    </select>
+				</div>
+
+				<div class="wrap-input100">
+					<span class="label-input100">Title</span>
+					{% if blog == None %}
+					<input class="input100" type="text" name="title">
+					{% else %}
+					<input class="input100" type="text" name="title" value="{{ blog.title }}">
+					{% endif %}
+				</div>
+
+				<div class="wrap-input100 validate-input" data-validate = "Message is required">
+					<span class="label-input100">Content</span>
+					{% if blog == None %}
+					<textarea id="mytextarea" name="content" rows="18" class="input100" style='white-space: pre-wrap;'></textarea>
+					{% else %}
+					<textarea id="mytextarea" name="content" rows="18" class="input100" style='white-space: pre-wrap;'>{{ blog.content }}</textarea>
+					{% endif %}
+				</div>
+
+				<div class="container-contact100-form-btn">
+					<div class="wrap-contact100-form-btn">
+						<div class="contact100-form-bgbtn"></div>
+						<button class="contact100-form-btn">
+							Submit
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+
+	<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+    {% load static %}
+	<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'js/popper.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'js/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'js/main2.js' %}"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+
+</body>
+</html>
