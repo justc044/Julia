@@ -42,6 +42,11 @@ def loginMember(request):
     return redirect('/accounts/login/')
 
 def index(request):
+
+    if request.user == None:
+        redirect('/accounts/login')
+    
+
     blogs_latest_four = Blog.objects.order_by('-create_date')[:4]
 
     context = {
