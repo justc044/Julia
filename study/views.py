@@ -38,8 +38,8 @@ def loginMember(request):
         login(request,user)
 
         return redirect('/')
-
-    return redirect('/accounts/login/')
+    else:
+        return redirect('/accounts/login/')
 
 def index(request):
 

@@ -26,7 +26,7 @@
         <button type="submit">create</button>
         <p class="message">이미 등록 하셨나요? <a href="#">로그인 해주세요</a></p>
       </form>
-      <form class="login-form" method="post" action="{% url 'login' %}">
+      <form class="login-form" method="post" action="/login/">
         {% csrf_token %}
         {% if msg %}
         <p class="message">{{ msg }}</p>
