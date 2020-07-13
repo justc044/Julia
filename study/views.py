@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404, redirect
 from django.contrib.auth.models import User, Group
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from .models import MemberInfo, Category, Blog
 import datetime
 
@@ -41,19 +41,23 @@ def loginMember(request):
     else:
         return redirect('/accounts/login/')
 
+def signout(request):
+    logout(request)
+
+    return redirect('/accounts/login/')
+
 def index(request):
 
-    if request.user == None:
-        redirect('/accounts/login')
-    
+    if request.user.is_authenticated:
+        blogs_latest_four = Blog.objects.order_by('-create_date')[:4]
 
-    blogs_latest_four = Blog.objects.order_by('-create_date')[:4]
+        context = {
+            'blogs': blogs_latest_four
+        }
 
-    context = {
-        'blogs': blogs_latest_four
-    }
-
-    return render(request, 'index.html', context)
+        return render(request, 'index.html', context)
+    else:
+        return redirect('/accounts/login')
 
 def blog_study(request):
     categories_all = Category.objects.all()
