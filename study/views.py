@@ -37,7 +37,8 @@ def loginMember(request):
 
         user = authenticate(username=username, password=password)
 
-        login(request,user)
+        if not request.user.is_anonymous:
+            login(request,user)
 
         if request.user.is_authenticated:
             return redirect('/')
