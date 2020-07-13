@@ -128,4 +128,8 @@
 	<!-- MAIN JS -->
 	<script src="{% static 'js/main.js' %}"></script>
 
+    <script>
+        $('#content').html($('#content').text().replace(/['"]+/g, ''));
+    </script>
+
 </html>
