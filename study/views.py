@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404, redirect
 from django.contrib.auth.models import User, Group
 from django.contrib.auth import login, authenticate, logout
+from django.urls import reverse
 from .models import MemberInfo, Category, Blog
 import datetime
 
@@ -35,9 +36,13 @@ def loginMember(request):
         password = signup_data.get("password")
 
         user = authenticate(username=username, password=password)
+
         login(request,user)
 
-        return redirect('/')
+        if request.user.is_authenticated:
+            return redirect('/')
+        else:
+            return redirect('/accounts/login')
     else:
         return redirect('/accounts/login/')
 
