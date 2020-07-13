@@ -37,7 +37,7 @@ def loginMember(request):
 
         user = authenticate(username=username, password=password)
 
-        if not request.user.is_anonymous:
+        if (user != None):
             login(request,user)
 
         if request.user.is_authenticated:
