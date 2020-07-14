@@ -14,7 +14,7 @@
 								<h3><a href="#">{{ blog.title }}</a></h3>
 								<span><small>by {{ blog.user.username }} </small> / <small> {{ blog.category.name }} </small> / <small> <i class="icon-comment"></i> {{ blog.create_date }}</small></span>
 								<div id="content">{{ blog.content|slice:":50" }}</div>
-								<a href={% url 'blog' blog.pk %} class="lead">Read More <i class="icon-arrow-right3"></i></a>
+								<a href={% url 'blog' blog.pk %} class="lead">Read More </a>
 							</div>
 						</div>
 					</div>
