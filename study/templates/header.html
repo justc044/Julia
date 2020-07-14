@@ -67,13 +67,16 @@
                     {% else %}
                     <li><a href={% url 'blog_study' %}>Blog</a></li>
                     {% endif %}
-                    {% if 'portfolio' in request.path %}
-                    <li class="fh5co-active"><a href={% url 'portfolio' %}>Portfolio</a></li>
+                    {% if 'about' in request.path %}
+                    <li class="fh5co-active"><a href={% url 'about' %}>About</a></li>
                     {% else %}
-                    <li><a href={% url 'portfolio' %}>Portfolio</a></li>
-                    {% endif %}
                     <li><a href={% url 'about' %}>About</a></li>
+                    {% endif %}
+                    {% if 'contact' in request.path %}
+                    <li class="fh5co-active"><a href={% url 'contact' %}>Contact</a></li>
+                    {% else %}
                     <li><a href={% url 'contact' %}>Contact</a></li>
+                    {% endif %}
                     <li><a href={% url 'signout' %}>Sign Out</a></li>
                 </ul>
             </nav>
