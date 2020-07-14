@@ -154,4 +154,10 @@ def about(request):
     return render(request, 'about.html')
 
 def contact(request):
-    return render(request, 'contact.html')
+    member = MemberInfo.objects.get(user = request.user)
+
+    context = {
+        'member_info': member
+    }
+    
+    return render(request, 'contact.html', context)

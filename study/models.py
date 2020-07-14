@@ -30,3 +30,12 @@ class MemberInfo(models.Model):
 
     def __str__(self):
         return self.name
+
+class Message(models.Model):
+    user = models.ForeignKey(User, on_delete = models.DO_NOTHING)
+    email = models.CharField(max_length=200, blank=True)
+    phone = models.CharField(max_length=30, blank=True)
+    message = models.TextField()
+
+    def __str__(self):
+        return self.message
